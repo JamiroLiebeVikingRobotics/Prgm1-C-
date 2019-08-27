@@ -1,0 +1,55 @@
+using System;
+
+class MainClass {
+  public static void Main (string[] args) {
+    string StartOver="";
+    do{
+Console.WriteLine("Login eller Additionsräknare? :");
+string setting = Console.ReadLine();
+
+if(setting == "Login"){
+  Console.WriteLine("Please enter your first name: ");
+
+  string fornamn = Console.ReadLine();
+  Console.WriteLine("Please enter your last name: ");
+  string efternamn = Console.ReadLine();
+Console.WriteLine("Please enter your age: ");
+string AgeString = Console.ReadLine();
+int Age = int.Parse(AgeString);
+  Console.WriteLine("Your name is: ");
+  Console.WriteLine (fornamn  + " "+efternamn);
+  
+  if (Age < 99) {Console.WriteLine("Next year you will be:  " + (Age + 1)+" " + "years old");
+  }
+else 
+{
+  Console.WriteLine("Next year you will be dead");
+}
+
+  if (Age < 18)
+  {
+    Console.WriteLine("Sorry you are too young for this website ;) ");
+  }
+  else{
+    Console.WriteLine("Welcome to bolibompa.se");
+  }
+   } 
+   
+else
+{
+  Console.WriteLine("Sorry this isnt available right now");
+} 
+ 
+  Console.WriteLine("Would you like to start over?: Yes, No");
+   StartOver = Console.ReadLine();
+
+if(StartOver == "Yes")
+{
+  Console.WriteLine("Cool");
+}
+    }while(StartOver=="Yes");
+     Console.WriteLine("Okay"); 
+  }
+
+ 
+}
