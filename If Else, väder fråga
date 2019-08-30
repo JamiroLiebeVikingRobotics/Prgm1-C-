@@ -1,0 +1,27 @@
+using System;
+
+class MainClass {
+  public static void Main (string[] args) {
+
+Console.WriteLine("Whats the weather like?");
+string input = Console.ReadLine(); 
+
+// Ändrar input till Stora bokstäver
+string weather = input.ToUpper();
+//Kollar om rätt input har användts
+if(weather == "J" || weather == "N")
+{
+  if(weather == "J")
+   Console.WriteLine ("Lets go for a picknick");
+ 
+   if(weather == "N")
+  Console.WriteLine("Lets read a book");
+
+}
+//Om inputen inte är acceptabel
+else
+Console.WriteLine("I dont understand :(");
+
+
+  }
+}
