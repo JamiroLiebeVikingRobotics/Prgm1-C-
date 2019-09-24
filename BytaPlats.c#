@@ -1,0 +1,26 @@
+using System;
+
+namespace Program
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a = 20;
+            int b = 10;
+            flip(ref a, ref b);
+            Console.WriteLine(a+" "+b);
+        }
+
+
+        static void flip(ref int tal1, ref int b)
+
+        {
+            int pos1 = tal1;
+            int pos2 = b;
+            tal1 = pos2;
+            b = pos1;
+        }
+     
+
+    }
