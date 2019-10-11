@@ -1,0 +1,112 @@
+#include <Servo.h>
+Servo servo;
+int led1 = 20;  // blå led
+int led2 = 50;   // Gul led 
+int led3 = 100; //Blå led
+int pos = 0;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(8, OUTPUT);
+pinMode(9, OUTPUT);
+pinMode(10, OUTPUT);
+servo.attach(13);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+digitalWrite(8, HIGH);
+ifHIGH();
+delay(300);
+digitalWrite(8, LOW);
+ifHIGH();
+delay(200);
+digitalWrite(9, HIGH);
+ifHIGH();
+delay(100);
+digitalWrite(9, LOW);
+ifHIGH();
+delay(100);
+digitalWrite(8, HIGH);
+ifHIGH();
+delay(200);
+digitalWrite(8, LOW);
+ifHIGH();
+delay(100);
+digitalWrite(9, HIGH);
+ifHIGH();
+delay(250);
+digitalWrite(9, LOW);
+ifHIGH();
+delay(700);
+digitalWrite(8, HIGH);
+delay(200);
+digitalWrite(10, HIGH);
+ifHIGH();
+delay(1000);
+digitalWrite(8, LOW);
+digitalWrite(10, LOW);
+ifHIGH();
+delay(2000);
+digitalWrite(10, HIGH);
+ifHIGH();
+delay(250);
+digitalWrite(10, LOW);
+ifHIGH();
+delay(50);
+digitalWrite(9, HIGH);
+ifHIGH();
+delay(250);
+digitalWrite(9, LOW);
+ifHIGH();
+delay(50);
+digitalWrite(10, HIGH);
+ifHIGH();
+delay(50);
+digitalWrite(10, LOW);
+ifHIGH();
+delay(70);
+digitalWrite(9, HIGH);
+ifHIGH();
+delay(150);
+digitalWrite(9, LOW);
+ifHIGH();
+delay(250);
+
+
+
+
+
+}
+
+void ifHIGH()
+{
+
+
+  
+if( digitalRead(8) == HIGH )
+{
+servo.write(led3);
+}
+else if (digitalRead(9) == HIGH)
+{
+  servo.write(led2);
+}
+else if (digitalRead(10) == HIGH)
+{
+  servo.write(led1);
+}
+else 
+{
+while(pos < 0)
+  {
+    servo.write(pos+=2);
+  }
+}
+
+
+}
+
+ 
+
+
