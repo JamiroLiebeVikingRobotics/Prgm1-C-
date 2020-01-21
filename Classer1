@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+
+namespace pssnmr
+{
+    class Meny
+    {
+        static void Main(string[] args)
+        {
+          
+            List<Person> personlista = new List<Person>();
+            Console.WriteLine("Skriv in Namn");
+            string namn = Console.ReadLine();
+            Person kalle = new Person(namn);
+            personlista.Add(kalle);
+
+
+
+        }
+    }
+    class Person
+    {
+        private string n;
+        public Person(string namn)
+        {
+            n = namn;
+        }
+
+    }
+
+    class search
+    {
+
+
+    }
+}
