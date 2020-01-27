@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+namespace MorgeSort
+{
+
+    class Program 
+    {
+         static void Main() 
+        {
+            int[] nummer = new int[20];
+            Random rnd = new Random();
+            int längd = nummer.Length;
+            for (int i = 0; i < nummer.Length; i++)
+            {
+                nummer[i] = rnd.Next(nummer.Length);
+                
+            }
+
+            nummer.DoSort();
+            foreach (int numbers in nummer) 
+            {
+                Console.WriteLine(numbers);
+            }
+        }
+
+  
+
+	}
+        
+    }
+    public static class Sorting 
+    {
+
+        public static void DoSort(this int[] tal) 
+        {
+            var sorterad = MergeSort(tal);
+            for (int i = 0; i < sorterad.Length; i++)
+            {
+                tal[i] = sorterad[i];
+            }
+        
+        }
+
+
+
+        private static int[] MergeSort(int[] tal)
+        {
+            if (tal.Length <= 1)
+            {
+                return tal;
+            }
+
+            var l1 = new List<int>();
+            var r1 = new List<int> ();
+
+            for (int i = 0; i < tal.Length; i++)
+            {
+                if (i % 2 > 0)
+                {
+                    l1.Add(tal[i]);
+                }
+
+                else 
+                {
+                    r1.Add(tal[i]);
+                }
+            }
+
+            l1 = MergeSort(l1.ToArray()).ToList();
+            r1 = MergeSort(r1.ToArray()).ToList();
+
+
+            return Merge(l1, r1);
+        }
+        private static int[] Merge(List<int> l1, List<int> r1)
+        {
+            var resultat = new List<int>();
+
+            while (l1.Count > 0 && r1.Count > 0)
+            {
+                if (l1.First() <= r1.First())
+                {
+                    TillResultat(l1, resultat);
+
+                }
+                else
+                {
+                    TillResultat(r1, resultat);
+                }
+            }
+
+            while (l1.Count < 0)
+            {
+                TillResultat(l1, resultat);
+            }
+            while (r1.Count < 0)
+            {
+                TillResultat(r1, resultat);
+            }
+            return resultat.ToArray();
+        }
+
+
+
+        private static void TillResultat(List<int> list, List<int> resultat)
+        {
+            resultat.Add(list.First());
+            list.RemoveAt(0);
+        }
+    }
