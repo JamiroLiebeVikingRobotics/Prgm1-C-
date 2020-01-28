@@ -1,57 +1,102 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.Threading;
 
-namespace sorteringalogritmh
+
+namespace MorgeSort
 {
+
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            int[] nummer = new int[500000];
+            int[] nummer = new int[1000000];
             Random rnd = new Random();
-            int längd = nummer.Length;
             Stopwatch stopWatch = new Stopwatch();
-
-
+            int längd = nummer.Length;
+            List<int> osorterad = new List<int>();
+            List<int> sorterad = new List<int>();
+            //Lägger till random genererade tal till listan
             for (int i = 0; i < nummer.Length; i++)
             {
                 nummer[i] = rnd.Next(nummer.Length);
+                osorterad.Add(nummer[i]);
+
             }
+            //Skriver ut den sortrade listan
             stopWatch.Start();
-            for (int x = 0; x < nummer.Length - 1; x++)
-            {
-                for (int y = 0; y < nummer.Length- 1-x; y++)
-                {
-                    if(nummer[y] > nummer[y + 1])
-                    {
-                        Swap(ref nummer[y], ref nummer[y + 1]);
-                    }
-                }
-            }
+            sorterad = MergeSort(osorterad);
             stopWatch.Stop();
-            TimeSpan ts = stopWatch.Elapsed;
+            Console.WriteLine("Time elapsed: {0}", stopWatch.Elapsed);
+          
 
-            // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            Console.WriteLine("RunTime " + elapsedTime);
-            for (int z = 0; z < nummer.Length; z++)
+           /* foreach (int x in sorterad)
             {
-                Console.WriteLine(nummer[z]);
+                Console.WriteLine(x);
             }
-           
+          */
+            
+        }
+        private static List<int> MergeSort(List<int> unsorted)
+        {
+            //om listan är tom returnera värdet
+            if (unsorted.Count <= 1)
+                return unsorted;
+            //skapar två listor
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
 
+            int middle = unsorted.Count / 2;
+            //dividerar den osorterade listan
+            for (int i = 0; i < middle; i++)  
+            {
+                left.Add(unsorted[i]);
+            }
+            for (int i = middle; i < unsorted.Count; i++)
+            {
+                right.Add(unsorted[i]);
+            }
 
+            left = MergeSort(left);
+            right = MergeSort(right);
+            return Merge(left, right);
         }
 
-        static void Swap(ref int a, ref int b)
+        private static List<int> Merge(List<int> left, List<int> right)
         {
-            int temp = a;
-            a = b;
-            b = temp;
+            List<int> result = new List<int>();
 
+            while (left.Count > 0 || right.Count > 0)
+            {
+                if (left.Count > 0 && right.Count > 0)
+                {   
+                    //Jämför båda listorna för att kolla vilken som hat störst första element
+                    if (left.First() <= right.First())
+                    {
+                        result.Add(left.First());
+                        left.Remove(left.First());
+                    }
+                    else
+                    {
+                        result.Add(right.First());
+                        right.Remove(right.First());
+                    }
+                }
+                else if (left.Count > 0)
+                {
+                    result.Add(left.First());
+                    left.Remove(left.First());
+                }
+                else if (right.Count > 0)
+                {
+                    result.Add(right.First());
+
+                    right.Remove(right.First());
+                }
+            }
+            return result;
         }
     }
 }
