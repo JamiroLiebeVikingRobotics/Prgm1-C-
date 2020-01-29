@@ -1,0 +1,57 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace sorteringalogritmh
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nummer = new int[500000];
+            Random rnd = new Random();
+            int längd = nummer.Length;
+            Stopwatch stopWatch = new Stopwatch();
+
+
+            for (int i = 0; i < nummer.Length; i++)
+            {
+                nummer[i] = rnd.Next(nummer.Length);
+            }
+            stopWatch.Start();
+            for (int x = 0; x < nummer.Length - 1; x++)
+            {
+                for (int y = 0; y < nummer.Length- 1-x; y++)
+                {
+                    if(nummer[y] > nummer[y + 1])
+                    {
+                        Swap(ref nummer[y], ref nummer[y + 1]);
+                    }
+                }
+            }
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+
+            // Format and display the TimeSpan value.
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds,
+                ts.Milliseconds / 10);
+            Console.WriteLine("RunTime " + elapsedTime);
+            for (int z = 0; z < nummer.Length; z++)
+            {
+                Console.WriteLine(nummer[z]);
+            }
+
+
+
+        }
+
+        static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+
+        }
+    }
+}
