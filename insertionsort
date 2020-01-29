@@ -1,0 +1,50 @@
+using System;
+using System.Diagnostics;
+using System.Threading;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] nummer = new int[50000];
+            Random rnd = new Random();
+            int längd = nummer.Length;
+            Stopwatch stopWatch = new Stopwatch();
+
+
+            for (int i = 0; i < nummer.Length; i++)
+            {
+                nummer[i] = rnd.Next(nummer.Length);
+            }
+            for (int i = 1; i < nummer.Length; i++)
+            {
+               int val = nummer[i];
+                int klar = 0;
+                //sorteringen
+                stopWatch.Start();
+                for (int j = i - 1; j >= 0 && klar != 1;)
+                {
+                    if (val < nummer[j])
+                    {
+                        nummer[j + 1] = nummer[j];
+                        j--;
+                        nummer[j + 1] = val;
+                    }
+                    //om arrayen är färdigsorterad avbryts loopen
+                    else  klar = 1;
+                }
+                stopWatch.Stop();
+                TimeSpan ts = stopWatch.Elapsed;
+            }
+                //skriver ut den sorterade arrayen
+              /*  for(int y = 0; y < nummer.Length; y++)
+            {
+                Console.WriteLine(nummer[y] + " ");
+            }
+            */
+            Console.WriteLine(stopWatch.Elapsed);
+        }
+    }
+}
